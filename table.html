@@ -1,0 +1,172 @@
+<template>
+	<div class="PMtable">
+		<table class="tableTitle" cellpadding="2" width="600px">
+		    <thead>
+			    <!--<tr>
+			      <td colspan="4" align="center">菜市场价格滚动条11</td>
+			      <td colspan="7" align="center"></td>
+			    </tr>-->
+			    <tr bgcolor="#134458">
+			      <td width="11%"   height="22">省份</td>
+			      <td width="11%"   height="22">城市</td>
+			      <td width="11%"   height="22">区县</td>
+			      <td width="12%"   height="22">均值</td>
+			      <td width="8%"   height="22">最小值</td>
+			      
+			      <td width="8%"   height="22">最大值</td>
+			      <td width="8%"   height="22">25%</td>
+			      <td width="8%"   height="22">50%</td>
+			      <td width="8%"   height="22">75%</td>
+			      <td width="10%"   height="22">样本量n(天)</td>
+			      
+			      <td width="8%"   height="22">缺失(天)</td>
+			    </tr>
+		    </thead>
+		</table>
+		<div id="demo" style="width:600px; height: 100px">
+  			<div id="demo1">
+  				<table class="tableCon" width="100%" v-on:mouseover="datashubiao" v-on:mouseout="mouseout1">
+				    <tr>
+				    	<td width="9%">北京市</td>
+				    	<td width="9%">北京市</td>
+				    	<td width="9%">东城区</td>
+				    	<td width="9%">90</td>
+				    	<td width="9%">30</td>
+				    
+				    	<td width="9%">120</td>
+				    	<td width="9%">20</td>
+				    	<td width="9%">50</td>
+				    	<td width="9%">70</td>
+				    	<td width="9%">30</td>
+				    
+				    	<td width="9%">0</td>
+				  	</tr>
+				 	<tr>
+				    	<td width="9%">北京市</td>
+				    	<td width="9%">北京市</td>
+				    	<td width="9%">西城区</td>
+				    	<td width="9%">90</td>
+				    	<td width="9%">30</td>
+				    
+				    	<td width="9%">120</td>
+				    	<td width="9%">20</td>
+				    	<td width="9%">50</td>
+				    	<td width="9%">70</td>
+				    	<td width="9%">30</td>
+				    
+				    	<td width="9%">0</td>
+				  	</tr>
+				  	<tr>
+				    	<td width="9%">北京市</td>
+				    	<td width="9%">北京市</td>
+				    	<td width="9%">昌平区</td>
+				    	<td width="9%">90</td>
+				    	<td width="9%">30</td>
+				    
+				    	<td width="9%">120</td>
+				    	<td width="9%">20</td>
+				    	<td width="9%">50</td>
+				    	<td width="9%">70</td>
+				    	<td width="9%">30</td>
+				    
+				    	<td width="9%">0</td>
+				  	</tr><tr>
+				    	<td width="9%">北京市</td>
+				    	<td width="9%">北京市</td>
+				    	<td width="9%">海淀区</td>
+				    	<td width="9%">90</td>
+				    	<td width="9%">30</td>
+				    
+				    	<td width="9%">120</td>
+				    	<td width="9%">20</td>
+				    	<td width="9%">50</td>
+				    	<td width="9%">70</td>
+				    	<td width="9%">30</td>
+				    
+				    	<td width="9%">0</td>
+				  	</tr><tr>
+				    	<td width="9%">北京市</td>
+				    	<td width="9%">北京市</td>
+				    	<td width="9%">石景山区</td>
+				    	<td width="9%">90</td>
+				    	<td width="9%">30</td>
+				    
+				    	<td width="9%">120</td>
+				    	<td width="9%">20</td>
+				    	<td width="9%">50</td>
+				    	<td width="9%">70</td>
+				    	<td width="9%">30</td>
+				    
+				    	<td width="9%">0</td>
+				  	</tr>
+				  
+				</table>
+    			<!--<Table :columns="columns1" :data="data2" style="overflow: hidden;"></Table>-->
+    		</div>
+    		<div id="demo2"></div>
+    	</div>
+   </div>
+</template>
+<script>
+    export default {
+        data () {
+            return {
+            	scroll: -1,     //定时器中使用。当表格滚动完了自动从第一条数据开始重复滚动
+            	myInterval: '',//设置定时器
+            	speed :50 ,  //定时器执行时间间隔
+            }
+        },
+        mounted () {
+	     	this.init();
+	    },
+	    methods: {
+	    	datashubiao () {
+	    		 clearInterval(this.myInterval);
+	    	},
+	    	mouseout1 () {
+	    		this.myInterval = setInterval(this.Marquee,this.speed);
+	    	},
+	    	goPingGu(){
+	    		this.modal = true;
+	    	},
+	    	Marquee(){
+	    		if (demo2.offsetTop <= demo.scrollTop){
+					demo.scrollTop -= demo1.offsetHeight;
+			    }else{
+					if(this.scroll!==demo.scrollTop ){
+						this.scroll = demo.scrollTop;
+						demo.scrollTop++;
+					}else{
+						demo.scrollTop = 0;
+						this.scroll = -1;
+					}
+			    }
+	    	},
+	    	init () {
+				demo2.innerHTML = demo1.innerHTML;
+				//console.log(document.getElementById("demo2").children[0].style.display="none");
+				this.myInterval = setInterval(this.Marquee,this.speed);//设置定时器并赋值给myInterval
+	    	}
+		}
+    }
+</script>
+<style>
+	#demo{
+	    overflow:hidden;
+	    width:100%;
+	    height:120px;
+	}
+	.PMtable{
+		position: absolute;
+	    z-index: 998;
+	    top: 80%;
+	    left: 72%;
+	}
+	.tableTitle{
+		color: #44D3E4;
+		border-collapse: collapse;
+	}
+	.tableCon{
+		color: #fff;
+	}
+</style>
